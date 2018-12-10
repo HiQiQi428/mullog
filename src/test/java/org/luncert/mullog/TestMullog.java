@@ -13,6 +13,8 @@ public class TestMullog {
     @Test
     public void test() {
         mullog.info("desc", "msg", 1);
+        mullog.setAppender("console2");
+        mullog.info("hi");
     }
 
 }

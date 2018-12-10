@@ -73,6 +73,8 @@ public class HelloWorld {
     }
 }
 ```
+* 切换 appender：```mullog.setAppender("cnosole2");```。
+* 更改 appender 日志等级：```mullog.getUsingAppender.setLogLevel(LogLevel.DEBUG)```。
 
 ### exp step：自定义 Appender
 

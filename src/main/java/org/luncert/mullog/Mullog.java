@@ -13,6 +13,8 @@ public final class Mullog implements Serializable {
 
     private Appender appender;
 
+    public Mullog() {}
+
     public Mullog(String name) {
         appender = MullogManager.getAppender(name);
         if (appender == null)
@@ -24,6 +26,9 @@ public final class Mullog implements Serializable {
     }
 
     private void log(int logLevel, Object... fields) {
+        if (appender == null)
+            throw new MullogException("no appender selected");
+            
         // 将Object[]转换为String[]
         String[] fs = new String[fields.length];
         for (int i = 0, limit = fields.length; i < limit; i++) {
@@ -67,6 +72,16 @@ public final class Mullog implements Serializable {
      */
     public void addAppender(String name, Appender appender) {
         MullogManager.addAppender(name, appender);
+    }
+
+    /**
+     * 替换当前 Appender
+     * @param name 名字
+     */
+    public void setAppender(String name) {
+        appender = MullogManager.getAppender(name);
+        if (appender == null)
+            throw new MullogException("invalid appender name - " + name);
     }
 
     public Appender getUsingAppender() {
